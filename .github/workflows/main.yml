@@ -23,4 +23,4 @@ jobs:
               if: always()
               with:
                   name: my-artifact
-                  path: '**/*.tar.zst'
+                  path: '**/*.*'
