@@ -14,7 +14,7 @@ jobs:
               run: |
                   sudo apt-get install transmission-cli
 
-            - run: timeout 540 transmission-cli ./target.torrent --download-dir $(pwd)
+            - run: timeout 420 transmission-cli ./target.torrent --download-dir $(pwd)
 
             - run: ls
               if: always()
