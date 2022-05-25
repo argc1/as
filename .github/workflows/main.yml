@@ -1,20 +1,26 @@
 name: CI
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run a one-line script
-        run: sudo apt-get install transmission-cli
-      - run: transmission-cli ./EE9FF6B14CBAD1F03DA1DA216EC2E4FB14F25693.torrent
-      - uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: "**/*.tar.zst"
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Run a one-line script
+              run: |
+                  sudo apt-get install transmission-cli wget
+                  wget https://github.com/pigeonburger/torrent-dl/releases/download/v1.4.2/torrent-dl-linux-x64 -O torrent
+                  chmod u+x torrent
+
+            - run: ./torrent -i ./EE9FF6B14CBAD1F03DA1DA216EC2E4FB14F25693.torrent
+
+            - uses: actions/upload-artifact@v3
+              with:
+                  name: my-artifact
+                  path: '**/*.tar.zst'
