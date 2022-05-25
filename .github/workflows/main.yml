@@ -14,11 +14,9 @@ jobs:
 
             - name: Run a one-line script
               run: |
-                  sudo apt-get install transmission-cli wget
-                  wget https://github.com/pigeonburger/torrent-dl/releases/download/v1.4.2/torrent-dl-linux-x64 -O torrent
-                  chmod u+x torrent
+                  sudo apt-get install aria2c
 
-            - run: ./torrent -i ./EE9FF6B14CBAD1F03DA1DA216EC2E4FB14F25693.torrent
+            - run: aria2c -j 10 ./EE9FF6B14CBAD1F03DA1DA216EC2E4FB14F25693.torrent
 
             - uses: actions/upload-artifact@v3
               with:
